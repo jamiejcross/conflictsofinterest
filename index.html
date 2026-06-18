@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conflict of Interest Policies: A Textual Analysis of 50 Academic Journals</title>
+<style>
+  :root{
+    --ink:#1c1c1e; --muted:#5b5f66; --line:#e2e0db; --bg:#faf8f4; --card:#ffffff;
+    --explicit:#2f6b4f; --explicit-bg:#dcefe0;
+    --partial:#b8862b; --partial-bg:#fbeecb;
+    --silent:#a23b3b; --silent-bg:#f6dcdc;
+    --accent:#324b6e;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+    line-height:1.55;font-size:17px;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:48px 28px 80px;}
+  header.title{border-bottom:2px solid var(--ink);padding-bottom:24px;margin-bottom:32px;}
+  h1{font-size:2.05rem;line-height:1.18;margin:0 0 12px;font-weight:600;letter-spacing:-0.01em;}
+  .sub{font-size:1.05rem;color:var(--muted);max-width:760px;}
+  .meta{font-size:0.82rem;color:var(--muted);margin-top:16px;font-family:ui-sans-serif,system-ui,sans-serif;letter-spacing:0.02em;text-transform:uppercase;}
+  h2{font-size:1.4rem;margin:52px 0 8px;font-weight:600;border-bottom:1px solid var(--line);padding-bottom:8px;}
+  h3{font-size:1.08rem;margin:30px 0 6px;font-weight:600;}
+  p{margin:12px 0;}
+  .lead{font-size:1.05rem;}
+  .note{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);
+    padding:16px 20px;border-radius:6px;font-size:0.95rem;color:var(--muted);font-family:ui-sans-serif,system-ui,sans-serif;line-height:1.5;}
+  .sans{font-family:ui-sans-serif,system-ui,sans-serif;}
+  /* Legend */
+  .legend{display:flex;gap:18px;flex-wrap:wrap;margin:18px 0 8px;font-family:ui-sans-serif,system-ui,sans-serif;font-size:0.85rem;}
+  .legend span{display:inline-flex;align-items:center;gap:7px;}
+  .chip{width:15px;height:15px;border-radius:3px;display:inline-block;border:1px solid rgba(0,0,0,.12);}
+  .c-e{background:var(--explicit)} .c-p{background:var(--partial)} .c-s{background:var(--silent)}
+  /* Stacked bars */
+  .bars{margin:24px 0 8px;font-family:ui-sans-serif,system-ui,sans-serif;}
+  .barrow{display:grid;grid-template-columns:230px 1fr;align-items:center;gap:14px;margin:11px 0;}
+  .barlabel{font-size:0.9rem;text-align:right;color:var(--ink);font-weight:500;}
+  .barlabel small{display:block;color:var(--muted);font-weight:400;font-size:0.72rem;text-transform:uppercase;letter-spacing:.03em;}
+  .bartrack{display:flex;height:30px;border-radius:5px;overflow:hidden;border:1px solid var(--line);background:#fff;}
+  .seg{display:flex;align-items:center;justify-content:center;color:#fff;font-size:0.78rem;font-weight:600;min-width:0;}
+  .seg.e{background:var(--explicit)} .seg.p{background:var(--partial)} .seg.s{background:var(--silent)}
+  /* Heatmap */
+  .heatscroll{overflow-x:auto;margin:18px -4px;}
+  table.heat{border-collapse:collapse;width:100%;font-family:ui-sans-serif,system-ui,sans-serif;font-size:0.82rem;min-width:760px;}
+  table.heat th{font-weight:600;text-align:center;padding:8px 6px;vertical-align:bottom;color:var(--ink);border-bottom:2px solid var(--ink);}
+  table.heat th.fw{text-align:left;width:210px;}
+  table.heat td{text-align:center;padding:0;border:2px solid var(--bg);}
+  table.heat td.fw{text-align:left;padding:9px 10px;font-weight:500;background:var(--card);border:1px solid var(--line);}
+  table.heat td.fw small{display:block;color:var(--muted);font-weight:400;font-size:0.72rem;}
+  .cell{height:40px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.8rem;}
+  .cell.e{background:var(--explicit-bg);color:var(--explicit);}
+  .cell.p{background:var(--partial-bg);color:var(--partial);}
+  .cell.s{background:var(--silent-bg);color:var(--silent);}
+  /* mapping table */
+  table.map{border-collapse:collapse;width:100%;font-family:ui-sans-serif,system-ui,sans-serif;font-size:0.85rem;margin:16px 0;}
+  table.map th{text-align:left;background:var(--accent);color:#fff;padding:8px 11px;font-weight:600;}
+  table.map td{padding:8px 11px;border-bottom:1px solid var(--line);vertical-align:top;}
+  table.map tr:nth-child(even){background:var(--card);}
+  .tag{display:inline-block;font-size:0.72rem;font-weight:700;padding:2px 7px;border-radius:20px;font-family:ui-sans-serif,system-ui,sans-serif;}
+  .tag.e{background:var(--explicit-bg);color:var(--explicit);}
+  .tag.p{background:var(--partial-bg);color:var(--partial);}
+  .tag.s{background:var(--silent-bg);color:var(--silent);}
+  ul.rec{font-family:ui-sans-serif,system-ui,sans-serif;font-size:0.95rem;}
+  ul.rec li{margin:7px 0;}
+  blockquote{margin:14px 0;padding:6px 18px;border-left:3px solid var(--partial);color:var(--muted);font-style:italic;font-size:0.96rem;}
+  footer{margin-top:60px;border-top:1px solid var(--line);padding-top:20px;font-size:0.82rem;color:var(--muted);font-family:ui-sans-serif,system-ui,sans-serif;}
+  footer a{color:var(--accent);}
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:26px 0;}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:16px;text-align:center;}
+  .kpi .n{font-size:2rem;font-weight:700;font-family:ui-sans-serif,system-ui,sans-serif;line-height:1;}
+  .kpi .l{font-size:0.78rem;color:var(--muted);margin-top:7px;font-family:ui-sans-serif,system-ui,sans-serif;}
+  .kpi.bad .n{color:var(--silent)} .kpi.ok .n{color:var(--explicit)} .kpi.mid .n{color:var(--partial)}
+  @media(max-width:680px){
+    .barrow{grid-template-columns:1fr;gap:4px}.barlabel{text-align:left}
+    .kpis{grid-template-columns:repeat(2,1fr)}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="title">
+  <h1>Declaring Interests, Selectively</h1>
+  <div class="sub">A textual analysis of conflict-of-interest policies across 50 global-health, health-policy and social-medicine journals — read as governance instruments, and assessed for where their wording could be tightened.</div>
+  <div class="meta">Regulatory-gap analysis · 50 journals · 12 distinct policy frameworks · 7 declaration dimensions · June 2026</div>
+</header>
+
+<p class="lead">The fifty journals in this corpus do not operate fifty conflict-of-interest regimes. They operate roughly a dozen. Almost all sit on top of the <strong>ICMJE Disclosure Form</strong> and the <strong>COPE</strong> guidance, with publisher houses (Elsevier, BMJ, Wiley, SAGE, Taylor &amp; Francis, BMC/Springer Nature, Oxford, MDPI, Frontiers) layering their own examples on top. Reading the policy texts side by side, the striking pattern is not variation but a <em>shared shape</em>: an exhaustive list of financial relationships, a precise demand for funding statements, and then a single elastic catch-all — &ldquo;any other personal or professional relationship that could be perceived to influence the work&rdquo; — into which everything awkward is folded.</p>
+
+<p>That catch-all is doing too much work. The analysis below scores each framework against the seven declaration dimensions you specified, distinguishing what policies name <strong>explicitly</strong>, what they leave <strong>partial</strong> (subsumed under a broad category, or bounded by an inconsistent time window), and where they are effectively <strong>silent</strong> and rely on author discretion.</p>
+
+<div class="kpis">
+  <div class="kpi ok"><div class="n">50</div><div class="l">journals name <strong>study funding</strong> explicitly</div></div>
+  <div class="kpi bad"><div class="n">0</div><div class="l">name <strong>gifts</strong> as a disclosable category</div></div>
+  <div class="kpi mid"><div class="n">15</div><div class="l">silent on <strong>in-kind</strong> contributions</div></div>
+  <div class="kpi mid"><div class="n">45</div><div class="l">do not name <strong>association invitations</strong> explicitly</div></div>
+</div>
+
+<h2>1 · The shape of the gap, dimension by dimension</h2>
+<p>Each bar shows how the 50 journals distribute across the three coverage levels for a given declarable item. The dimensions are ordered from best-covered (top) to weakest (bottom) — which is, in effect, a priority list for reform.</p>
+
+<div class="legend">
+  <span><i class="chip c-e"></i> Explicit — named as a disclosable item in the policy text</span>
+  <span><i class="chip c-p"></i> Partial — implied, subsumed under a broad heading, or time-bounded</span>
+  <span><i class="chip c-s"></i> Silent — not addressed; left to author discretion</span>
+</div>
+
+<div class="bars">
+  <div class="barrow"><div class="barlabel">Study funding<small>sources & funder role</small></div>
+    <div class="bartrack"><div class="seg e" style="flex:50">50 explicit</div></div></div>
+
+  <div class="barrow"><div class="barlabel">Individual shares<small>stock / equity holdings</small></div>
+    <div class="bartrack"><div class="seg e" style="flex:42">42</div><div class="seg p" style="flex:8">8</div></div></div>
+
+  <div class="barrow"><div class="barlabel">Association invitations<small>society / honorary roles</small></div>
+    <div class="bartrack"><div class="seg e" style="flex:5">5</div><div class="seg p" style="flex:30">30 partial</div><div class="seg s" style="flex:15">15</div></div></div>
+
+  <div class="barrow"><div class="barlabel">In-kind contributions<small>equipment, writing, travel</small></div>
+    <div class="bartrack"><div class="seg e" style="flex:12">12</div><div class="seg p" style="flex:23">23 partial</div><div class="seg s" style="flex:15">15</div></div></div>
+
+  <div class="barrow"><div class="barlabel">Prior work experience<small>past employment w/ companies</small></div>
+    <div class="bartrack"><div class="seg p" style="flex:50">50 partial — inconsistent time windows</div></div></div>
+
+  <div class="barrow"><div class="barlabel">Personal work contacts<small>relationships, friendships</small></div>
+    <div class="bartrack"><div class="seg p" style="flex:50">50 partial — folded into the catch-all clause</div></div></div>
+
+  <div class="barrow"><div class="barlabel">Gifts from companies<small>hospitality, benefits</small></div>
+    <div class="bartrack"><div class="seg s" style="flex:50">50 silent — no framework names gifts</div></div></div>
+</div>
+
+<p class="note"><strong>How to read this:</strong> the two items the user most often associates with &ldquo;conflict of interest&rdquo; in the abstract — money for the study, and shares in a company — are exactly the two that are already tightly specified. The reputational and relational channels through which influence actually travels in qualitative and policy research — gifts, hospitality, society invitations, personal contacts, an old job at a firm — are precisely where the policies thin out into discretion.</p>
+
+<h2>2 · Coverage matrix: frameworks × declaration dimensions</h2>
+<p>Rows are the distinct policy frameworks (with the number of journals in this corpus that rely on each). Columns are the seven dimensions. The ICMJE/COPE baseline row captures the smaller publishers and society journals that adopt the ICMJE form without adding their own examples.</p>
+
+<div class="legend">
+  <span><i class="chip c-e"></i> Explicit</span>
+  <span><i class="chip c-p"></i> Partial</span>
+  <span><i class="chip c-s"></i> Silent</span>
+</div>
+
+<div class="heatscroll">
+<table class="heat">
+  <thead>
+    <tr>
+      <th class="fw">Policy framework <small>(journals in corpus)</small></th>
+      <th>Study<br>funding</th><th>In-kind<br>contrib.</th><th>Individual<br>shares</th><th>Prior work<br>experience</th><th>Personal<br>contacts</th><th>Gifts</th><th>Assoc.<br>invitations</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="fw">Taylor &amp; Francis <small>6 journals</small></td>
+      <td><div class="cell e">E</div></td><td><div class="cell e">E</div></td><td><div class="cell e">E</div></td><td><div class="cell p">P</div></td><td><div class="cell p">P</div></td><td><div class="cell s">S</div></td><td><div class="cell p">P</div></td></tr>
+    <tr><td class="fw">Wiley <small>4 journals</small></td>
+      <td><div class="cell e">E</div></td><td><div class="cell e">E</div></td><td><div class="cell e">E</div></td><td><div class="cell p">P</div></td><td><div class="cell p">P</div></td><td><div class="cell s">S</div></td><td><div class="cell p">P</div></td></tr>
+    <tr><td class="fw">BMJ <small>2 journals</small></td>
+      <td><div class="cell e">E</div></td><td><div class="cell e">E</div></td><td><div class="cell e">E</div></td><td><div class="cell p">P</div></td><td><div class="cell p">P</div></td><td><div class="cell s">S</div></td><td><div class="cell p">P</div></td></tr>
+    <tr><td class="fw">SAGE <small>5 journals</small></td>
+      <td><div class="cell e">E</div></td><td><div class="cell p">P</div></td><td><div class="cell e">E</div></td><td><div class="cell p">P</div></td><td><div class="cell p">P</div></td><td><div class="cell s">S</div></td><td><div class="cell e">E</div></td></tr>
+    <tr><td class="fw">Elsevier <small>6 journals</small></td>
+      <td><div class="cell e">E</div></td><td><div class="cell s">S</div></td><td><div class="cell e">E</div></td><td><div class="cell p">P</div></td><td><div class="cell p">P</div></td><td><div class="cell s">S</div></td><td><div class="cell p">P</div></td></tr>
+    <tr><td class="fw">BMC / Springer Nature <small>5 journals</small></td>
+      <td><div class="cell e">E</div></td><td><div class="cell p">P</div></td><td><div class="cell e">E</div></td><td><div class="cell p">P</div></td><td><div class="cell p">P</div></td><td><div class="cell s">S</div></td><td><div class="cell s">S</div></td></tr>
+    <tr><td class="fw">Springer (journal-level) <small>2 journals</small></td>
+      <td><div class="cell e">E</div></td><td><div class="cell p">P</div></td><td><div class="cell e">E</div></td><td><div class="cell p">P</div></td><td><div class="cell p">P</div></td><td><div class="cell s">S</div></td><td><div class="cell s">S</div></td></tr>
+    <tr><td class="fw">MDPI <small>1 journal</small></td>
+      <td><div class="cell e">E</div></td><td><div class="cell s">S</div></td><td><div class="cell e">E</div></td><td><div class="cell p">P</div></td><td><div class="cell p">P</div></td><td><div class="cell s">S</div></td><td><div class="cell p">P</div></td></tr>
+    <tr><td class="fw">Oxford University Press <small>3 journals</small></td>
+      <td><div class="cell e">E</div></td><td><div class="cell s">S</div></td><td><div class="cell p">P</div></td><td><div class="cell p">P</div></td><td><div class="cell p">P</div></td><td><div class="cell s">S</div></td><td><div class="cell s">S</div></td></tr>
+    <tr><td class="fw">Frontiers <small>2 journals</small></td>
+      <td><div class="cell e">E</div></td><td><div class="cell s">S</div></td><td><div class="cell p">P</div></td><td><div class="cell p">P</div></td><td><div class="cell p">P</div></td><td><div class="cell s">S</div></td><td><div class="cell s">S</div></td></tr>
+    <tr><td class="fw">Policy Press / Bristol UP <small>3 journals</small></td>
+      <td><div class="cell e">E</div></td><td><div class="cell s">S</div></td><td><div class="cell p">P</div></td><td><div class="cell p">P</div></td><td><div class="cell p">P</div></td><td><div class="cell s">S</div></td><td><div class="cell s">S</div></td></tr>
+    <tr><td class="fw">ICMJE / COPE baseline <small>11 journals*</small></td>
+      <td><div class="cell e">E</div></td><td><div class="cell p">P</div></td><td><div class="cell e">E</div></td><td><div class="cell p">P</div></td><td><div class="cell p">P</div></td><td><div class="cell s">S</div></td><td><div class="cell p">P</div></td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">* ICMJE/COPE baseline groups journals whose stated policy is simply to require the ICMJE form or follow COPE without adding house-specific examples: WHO Bulletin, Journal of Global Health, AJPH, Journal of Public Health Policy (Palgrave), Journal of Health Politics Policy &amp; Law (Duke UP), the two Cambridge UP journals, IJHPM, Journal of Public Health Management &amp; Practice (Wolters Kluwer/Lippincott), SDH, and Journal of Health Care for the Poor &amp; Underserved (Johns Hopkins UP). These inherit the ICMJE form's strengths (funding, shares) and its silences (gifts).</p>
+
+<h2>3 · Where the policies are already tight</h2>
+<h3>Study funding — universal and specific</h3>
+<p>Every framework in the corpus requires a funding statement, and the better ones go further than naming the funder: the ICMJE recommendation insists on separating <em>direct support for the work</em> from <em>general institutional support for an author's time</em>, and on describing the funder's role in design, data, writing and the decision to publish. MDPI, Frontiers, SAGE and Elsevier all carry an explicit &ldquo;the funder had no role&hellip;&rdquo; template. There is little to tighten here except enforcement.</p>
+
+<h3>Individual shares — explicit almost everywhere</h3>
+<p>&ldquo;Stock ownership or options&rdquo; (ICMJE), &ldquo;holding stocks or shares&rdquo; (BMC), &ldquo;stocks, shares, patents&hellip;&rdquo; (SAGE), &ldquo;stock or share ownership&rdquo; (T&amp;F) — equity is the single most consistently named non-funding item, explicit in 42 of 50 journals. The one substantive loophole worth flagging is Elsevier's <em>de minimis</em> carve-out, which excludes holdings below 1% of a publicly traded company or held through mutual/pension funds. That is defensible for large-cap exposure but creates a bright-line exemption that a determined author can sit just underneath.</p>
+
+<h2>4 · Where the policies thin out — and how to tighten them</h2>
+
+<h3 style="color:var(--silent)">Gifts received from companies — the systematic silence</h3>
+<p>Not one framework in the corpus names <strong>gifts or hospitality</strong> as a disclosable category. The word does not appear in the ICMJE recommendation, the BMJ examples, the SAGE or T&amp;F lists, or the MDPI and Elsevier enumerations. Gifts are presumably meant to fall under &ldquo;any other relationship that could be perceived to influence the work&rdquo; — but a meal, a conference dinner, sponsored travel, or a piece of branded equipment does not read to most authors as a &ldquo;relationship,&rdquo; and so goes undeclared. This is the clearest single opportunity in the corpus.</p>
+<ul class="rec">
+  <li><strong>Name gifts and hospitality as their own line item</strong>, distinct from honoraria and consulting fees, with a worked example (&ldquo;e.g. sponsored travel to a meeting, meals, accommodation, branded equipment, or other benefits in kind from a commercial entity&rdquo;).</li>
+  <li><strong>Set a de minimis threshold</strong> rather than relying on author judgement of &ldquo;significance&rdquo; — borrow the convention from clinical guidelines (e.g. cumulative value over a stated sum within 36 months).</li>
+</ul>
+
+<h3 style="color:var(--silent)">In-kind contributions — named by a minority</h3>
+<p>Only BMJ (&ldquo;receipt of equipment or supplies&rdquo;), Wiley (&ldquo;drugs/equipment supplied&hellip;, travel paid&hellip;, writing assistance, administrative support&rdquo;) and Taylor &amp; Francis (&ldquo;receipt of drugs, specialist equipment, tools, computer programs&hellip;writing assistance or administrative support&rdquo;) name in-kind support explicitly — 12 journals in all. A further 23 capture it only obliquely through &ldquo;reimbursements&rdquo; or &ldquo;other funding&rdquo;; Elsevier, MDPI, Frontiers, Oxford and Policy Press are effectively silent. For ethnographic and policy research in particular, in-kind support (access to a field site, seconded staff, data, software, facilitation) is often the <em>only</em> material relationship with an interested party, and it falls straight through a funding-centric form.</p>
+<ul class="rec">
+  <li><strong>Replace &ldquo;funding&rdquo; with &ldquo;funding and material support&rdquo;</strong> in the statement prompt, and enumerate non-cash forms: equipment, software, data access, facilities, seconded personnel, writing/editorial assistance, and travel.</li>
+  <li><strong>Require the role-of-supporter statement to extend to in-kind providers</strong>, not just cash funders — the body that lent the equipment may have the same interest as the body that wrote the cheque.</li>
+</ul>
+
+<h3 style="color:var(--partial)">Invitations from professional associations — mostly partial or silent</h3>
+<p>Paid lectures, speakers' bureaux and honoraria are captured by most frameworks, but <em>unpaid</em> invitations — keynote slots, committee seats, advisory or honorary roles offered by professional associations and learned societies — are named explicitly only by SAGE, which lists &ldquo;members of a research advisory board, steering or advisory committees, associations or honorary affiliations&rdquo; and &ldquo;membership of organisations or scientific societies that undertake advocacy work.&rdquo; Fifteen journals are wholly silent. The reputational pull of a prestigious unpaid invitation is real and is exactly the kind of secondary interest the policies claim to be about.</p>
+<ul class="rec">
+  <li><strong>Adopt SAGE's wording as a sector template</strong>: name advisory boards, steering committees, honorary roles and society memberships — and make clear these are disclosable <em>whether or not</em> they are remunerated.</li>
+  <li><strong>Distinguish advocacy-oriented bodies</strong> (whose positions may bear directly on the research) from neutral learned societies, so that the declaration is informative rather than a box-tick.</li>
+</ul>
+
+<h3 style="color:var(--partial)">Previous work experience with companies — universally partial, inconsistently bounded</h3>
+<p>Employment is named everywhere, but almost always in the present tense, and the look-back windows are wildly inconsistent: ICMJE asks for relationships in the general area over the <strong>36 months</strong> before submission; SAGE uses a <strong>five-year</strong> window; Oxford asks for consultancies within <strong>12 months</strong>. The result is that the same prior post at a company would be declarable at one journal and not another, and authors moving between journals cannot form a stable habit of disclosure.</p>
+<ul class="rec">
+  <li><strong>State a single explicit look-back period</strong> for prior employment and consultancy (the ICMJE 36-month standard is the obvious anchor) and apply it consistently.</li>
+  <li><strong>Name &ldquo;former employment or consultancy&rdquo; as a distinct prompt</strong> rather than leaving it to authors to infer that a past role counts as a current &ldquo;relationship.&rdquo;</li>
+</ul>
+
+<h3 style="color:var(--partial)">Personal work contacts — the elastic clause</h3>
+<p>Every framework gestures at &ldquo;personal or professional relationships,&rdquo; &ldquo;rivalries,&rdquo; or &ldquo;close working relationships,&rdquo; but the wording is uniformly soft and the threshold is left entirely to the author. SAGE again goes furthest (&ldquo;close relatives,&rdquo; &ldquo;close working relationships with editors, editorial board members&rdquo;) and Frontiers operationalises it best — but only for editors and reviewers, in a structured questionnaire (spouse, close friend, recent co-author, supervisor/student within three years). Authors face no equivalent structured prompt.</p>
+<ul class="rec">
+  <li><strong>Port Frontiers' reviewer questionnaire to the author side</strong>: convert the catch-all into specific yes/no prompts (recent co-authorship, shared institution, supervisory relationship, family tie) with stated time bounds.</li>
+  <li><strong>Define the threshold</strong> for a declarable personal contact, rather than asking authors to self-assess what &ldquo;could be perceived&rdquo; as influential.</li>
+</ul>
+
+<h2>5 · A note on the limits of disclosure</h2>
+<p>Tightening wording closes the gaps catalogued above, but it does not resolve the deeper design choice these policies share. They are <em>transparency</em> instruments, not <em>management</em> instruments: with the partial exception of editorial recusal, almost every framework states that a declared interest will not, in itself, prevent publication. BMJ is explicit — &ldquo;we will not reject papers simply because authors have a competing interest.&rdquo; Disclosure thus shifts the interpretive burden onto the reader, who is presumed able to weigh an interest they can see. The seven dimensions you have flagged are, in effect, the items the current architecture renders <em>least</em> visible — and so the items on which the reader is least equipped to judge. The strongest version of &ldquo;tightening&rdquo; is therefore not only longer lists but structured, item-by-item prompts (the Frontiers model) that remove discretion from the point of disclosure, where it currently sits.</p>
+
+<h2>6 · Journal-to-framework mapping</h2>
+<p>The fifty journals and the policy framework each relies on. Coverage tags summarise the framework's standing on the four weakest dimensions.</p>
+
+<table class="map">
+  <thead><tr><th>Framework (journals)</th><th>Journals in this corpus</th><th>In-kind</th><th>Gifts</th><th>Assoc.</th><th>Personal</th></tr></thead>
+  <tbody>
+    <tr><td>Elsevier (6)</td><td>The Lancet Global Health; Health &amp; Place; Lancet Public Health; Health Policy; Social Science &amp; Medicine; SSM&ndash;Population Health</td><td><span class="tag s">Silent</span></td><td><span class="tag s">Silent</span></td><td><span class="tag p">Partial</span></td><td><span class="tag p">Partial</span></td></tr>
+    <tr><td>Taylor &amp; Francis (6)</td><td>Global Health Action; Global Public Health; Critical Public Health; Health Systems &amp; Reform; Ethnicity &amp; Health; Community, Work &amp; Family</td><td><span class="tag e">Explicit</span></td><td><span class="tag s">Silent</span></td><td><span class="tag p">Partial</span></td><td><span class="tag p">Partial</span></td></tr>
+    <tr><td>SAGE (5)</td><td>J. Health Services Research &amp; Policy; J. European Social Policy; Int. J. Social Determinants of Health; J. Health and Social Behavior; Critical Social Policy</td><td><span class="tag p">Partial</span></td><td><span class="tag s">Silent</span></td><td><span class="tag e">Explicit</span></td><td><span class="tag p">Partial</span></td></tr>
+    <tr><td>BMC / Springer Nature (5)</td><td>Globalisation and Health; Int. J. for Equity in Health; BMC Public Health; BMC Health Services Research; BMC Public Health&ndash;Socioeconomic Determinants</td><td><span class="tag p">Partial</span></td><td><span class="tag s">Silent</span></td><td><span class="tag s">Silent</span></td><td><span class="tag p">Partial</span></td></tr>
+    <tr><td>Wiley (4)</td><td>Milbank Quarterly; Health Expectations; Sociology of Health &amp; Illness; Int. J. of Social Welfare</td><td><span class="tag e">Explicit</span></td><td><span class="tag s">Silent</span></td><td><span class="tag p">Partial</span></td><td><span class="tag p">Partial</span></td></tr>
+    <tr><td>Oxford University Press (3)</td><td>Health Policy and Planning; European J. of Public Health; Health &amp; Social Work</td><td><span class="tag s">Silent</span></td><td><span class="tag s">Silent</span></td><td><span class="tag s">Silent</span></td><td><span class="tag p">Partial</span></td></tr>
+    <tr><td>Policy Press / Bristol UP (3)</td><td>Policy &amp; Politics; Evidence &amp; Policy; J. of Poverty and Social Justice</td><td><span class="tag s">Silent</span></td><td><span class="tag s">Silent</span></td><td><span class="tag s">Silent</span></td><td><span class="tag p">Partial</span></td></tr>
+    <tr><td>BMJ (2)</td><td>BMJ Global Health; J. of Epidemiology &amp; Community Health</td><td><span class="tag e">Explicit</span></td><td><span class="tag s">Silent</span></td><td><span class="tag p">Partial</span></td><td><span class="tag p">Partial</span></td></tr>
+    <tr><td>Frontiers (2)</td><td>Frontiers in Public Health; Int. J. of Public Health</td><td><span class="tag s">Silent</span></td><td><span class="tag s">Silent</span></td><td><span class="tag s">Silent</span></td><td><span class="tag p">Partial</span></td></tr>
+    <tr><td>Cambridge University Press (2)</td><td>Health Economics, Policy and Law; J. of Law, Medicine &amp; Ethics</td><td><span class="tag p">Partial</span></td><td><span class="tag s">Silent</span></td><td><span class="tag p">Partial</span></td><td><span class="tag p">Partial</span></td></tr>
+    <tr><td>Springer, journal-level (2)</td><td>Health Care Analysis; Culture, Medicine, and Psychiatry</td><td><span class="tag p">Partial</span></td><td><span class="tag s">Silent</span></td><td><span class="tag s">Silent</span></td><td><span class="tag p">Partial</span></td></tr>
+    <tr><td>MDPI (1)</td><td>Int. J. of Environmental Research and Public Health</td><td><span class="tag s">Silent</span></td><td><span class="tag s">Silent</span></td><td><span class="tag p">Partial</span></td><td><span class="tag p">Partial</span></td></tr>
+    <tr><td>Other ICMJE/COPE adopters (9)</td><td>WHO Bulletin; J. of Global Health; AJPH; J. of Public Health Policy (Palgrave); J. of Health Politics, Policy and Law (Duke UP); IJHPM; J. of Public Health Management &amp; Practice (Lippincott); Social Determinants of Health (SBMU); J. of Health Care for the Poor &amp; Underserved (JHUP)</td><td><span class="tag p">Partial</span></td><td><span class="tag s">Silent</span></td><td><span class="tag p">Partial</span></td><td><span class="tag p">Partial</span></td></tr>
+  </tbody>
+</table>
+
+<footer>
+  <p><strong>Method &amp; caveats.</strong> Coverage levels reflect the wording of each publisher's <em>generic</em> conflict-of-interest / competing-interest policy as published on its author-guidance pages (verified June 2026), plus the ICMJE Recommendations and Disclosure Form on which the majority depend. Individual journals occasionally add stricter requirements at the title level that are not captured here; where a journal's stated policy was simply to follow ICMJE/COPE, it is scored at the ICMJE/COPE baseline. &ldquo;Explicit / Partial / Silent&rdquo; refer to whether the named item appears in the policy text, not to how rigorously any journal enforces it. This is a reading of policy language, not an audit of published disclosures.</p>
+  <p><strong>Primary sources.</strong>
+  <a href="https://www.icmje.org/recommendations/browse/roles-and-responsibilities/author-responsibilities--conflicts-of-interest.html">ICMJE — Disclosure of Financial and Non-Financial Relationships</a> ·
+  <a href="https://authors.bmj.com/policies/competing-interests/">BMJ — Competing interests</a> ·
+  <a href="https://authorservices.taylorandfrancis.com/editorial-policies/competing-interest/">Taylor &amp; Francis — What is a competing interest?</a> ·
+  <a href="https://www.sagepub.com/journals/publication-ethics-policies/declaration-of-conflicting-interests">SAGE — Declaration of conflicting interests</a> ·
+  <a href="https://www.biomedcentral.com/getpublished/editorial-policies">BMC — Editorial policies (competing interests)</a> ·
+  <a href="https://www.mdpi.com/ethics">MDPI — Research and publication ethics</a> ·
+  <a href="https://www.frontiersin.org/guidelines/policies-and-publication-ethics">Frontiers — Policies and publication ethics</a> ·
+  <a href="https://www.elsevier.com/about/policies-and-standards/competing-interests">Elsevier — Competing interests</a> ·
+  <a href="https://academic.oup.com/pages/for-authors/journals/preparing-and-submitting-your-manuscript/conflicts-of-interest">Oxford Academic — Conflicts of interest</a> ·
+  <a href="https://authors.wiley.com/ethics-guidelines/index.html">Wiley — Best practice guidelines on research integrity and publishing ethics</a>.</p>
+</footer>
+
+</div>
+</body>
+</html>
