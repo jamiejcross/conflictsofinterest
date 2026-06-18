@@ -10,11 +10,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Questrial&display=swap" rel="stylesheet">
 <style>
   :root{
-    --ink:#ededed; --muted:#9b9b9b; --line:#272727; --bg:#000000; --card:#121212;
-    --explicit:#46c98b; --explicit-bg:rgba(70,201,139,.16);
-    --partial:#e3ad42; --partial-bg:rgba(227,173,66,.16);
-    --silent:#e76a6a; --silent-bg:rgba(231,106,106,.18);
-    --accent:#7aa2d6;
+    --ink:#000000; --muted:#555555; --line:#e0e0e0; --bg:#ffffff; --card:#f7f7f7;
+    --explicit:#1f9d63; --explicit-bg:rgba(31,157,99,.14);
+    --partial:#c8851a; --partial-bg:rgba(200,133,26,.16);
+    --silent:#cf3b3b; --silent-bg:rgba(207,59,59,.13);
+    --accent:#2f5c99;
     --maxw:1080px;
     --font:'Questrial',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   }
@@ -30,9 +30,9 @@
   .sub{font-size:1.08rem;color:var(--muted);max-width:780px;line-height:1.5;}
   .meta{font-size:0.74rem;color:var(--muted);margin-top:20px;letter-spacing:0.16em;text-transform:uppercase;}
   h2{font-size:1.45rem;margin:58px 0 10px;font-weight:400;border-bottom:1px solid var(--line);padding-bottom:10px;letter-spacing:0.01em;}
-  h3{font-size:1.12rem;margin:32px 0 6px;font-weight:400;color:#fff;}
+  h3{font-size:1.12rem;margin:32px 0 6px;font-weight:400;color:#111;}
   p{margin:13px 0;}
-  .lead{font-size:1.12rem;color:#dcdcdc;}
+  .lead{font-size:1.12rem;color:#222;}
   .note{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);
     padding:17px 22px;border-radius:7px;font-size:0.94rem;color:var(--muted);line-height:1.55;}
   /* Legend */
@@ -46,6 +46,15 @@
   .kpi .n{font-size:2.1rem;line-height:1;}
   .kpi .l{font-size:0.78rem;color:var(--muted);margin-top:9px;line-height:1.4;}
   .kpi.bad .n{color:var(--silent)} .kpi.ok .n{color:var(--explicit)} .kpi.mid .n{color:var(--partial)}
+  /* Partners / links */
+  .partners{display:flex;align-items:center;justify-content:center;gap:38px;flex-wrap:wrap;
+    margin:34px 0 10px;padding:22px;background:var(--card);border:1px solid var(--line);border-radius:9px;}
+  .partners p{margin:0;}
+  .github-link-inline{display:inline-flex;align-items:center;gap:9px;color:var(--ink);
+    text-decoration:none;font-size:0.95rem;}
+  .github-link-inline:hover{color:var(--accent);}
+  .aimeters-link-inline{display:inline-flex;align-items:center;}
+  .AI-HL-PR-logo{height:46px;width:auto;display:block;}
   /* Stacked bars */
   .bars{margin:26px 0 8px;}
   .barrow{display:grid;grid-template-columns:240px 1fr;align-items:center;gap:16px;margin:12px 0;}
@@ -70,7 +79,7 @@
   table.map{border-collapse:collapse;width:100%;font-size:0.85rem;margin:16px 0;}
   table.map th{text-align:left;background:#19243a;color:#dfe7f3;padding:9px 11px;font-weight:400;}
   table.map td{padding:9px 11px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);}
-  table.map tr:nth-child(even) td{background:#0c0c0c;}
+  table.map tr:nth-child(even) td{background:#f3f3f3;}
   .tag{display:inline-block;font-size:0.72rem;font-weight:700;padding:2px 8px;border-radius:20px;}
   .tag.e{background:var(--explicit-bg);color:var(--explicit);}
   .tag.p{background:var(--partial-bg);color:var(--partial);}
@@ -81,8 +90,8 @@
   footer{margin-top:64px;border-top:1px solid var(--line);padding-top:22px;font-size:0.82rem;color:var(--muted);line-height:1.55;}
   footer a{color:var(--accent);text-decoration:none;}
   footer a:hover{text-decoration:underline;}
-  strong{color:#fff;font-weight:700;}
-  em{color:#cfcfcf;}
+  strong{color:#000;font-weight:700;}
+  em{color:#444;}
   @media(max-width:680px){
     h1{font-size:1.9rem}
     .barrow{grid-template-columns:1fr;gap:5px}.barlabel{text-align:left}
@@ -94,7 +103,6 @@
 <div class="wrap">
 
 <header class="title">
-  <div class="kicker">Regulatory-gap analysis · June 2026</div>
   <h1>Conflict of Interest Policies in Academic Publishing</h1>
   <div class="sub">A textual analysis of conflict-of-interest policies across 50 global-health, health-policy and social-medicine journals — read as governance instruments, and assessed for where their wording could be tightened.</div>
   <div class="meta">50 journals · 12 distinct policy frameworks · 7 declaration dimensions</div>
@@ -110,6 +118,22 @@
   <div class="kpi mid"><div class="n">15</div><div class="l">silent on <strong>in-kind</strong> contributions</div></div>
   <div class="kpi mid"><div class="n">45</div><div class="l">do not name <strong>association invitations</strong> explicitly</div></div>
 </div>
+
+<div class="partners">
+    <p>
+        <a href="https://github.com/jamiejcross/conflictsofinterest" target="_blank" rel="noopener" class="github-link-inline">
+        <svg height="30" width="30" viewBox="0 0 16 16" style="fill: currentColor; vertical-align: middle; margin-bottom: 2px;">
+            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
+        </svg>
+        <strong>GitHub Repository</strong>
+        </a>
+    </p>
+    <p>
+       <a href="https://www.theaimeters.com/" target="_blank" rel="noopener" class="aimeters-link-inline">
+        <img src="AI-HL-PRweb.png" alt="AI-HL-PR" class="AI-HL-PR-logo">
+       </a>
+    </p>
+  </div>
 
 <h2>1 · The shape of the gap, dimension by dimension</h2>
 <p>Each bar shows how the 50 journals distribute across the three coverage levels for a given declarable item. The dimensions are ordered from best-covered (top) to weakest (bottom) — which is, in effect, a priority list for reform.</p>
